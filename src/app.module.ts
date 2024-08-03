@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { EventsModule } from './events/events.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { EventsModule } from './events/events.module';
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     EventsModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
