@@ -10,14 +10,16 @@ async function bootstrap() {
   const secret = configService.get<number>('JWT_SECRET', 4000);
   const port = configService.get<number>('PORT', 4000);
 
-  app.use(session({
-    secret: secret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 3600000
-    }
-  }));
+  app.use(
+    session({
+      secret: secret,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 3600000,
+      },
+    }),
+  );
 
   app.enableCors({
     origin: 'https://localhost:3000', // FE url

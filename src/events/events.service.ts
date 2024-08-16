@@ -7,7 +7,9 @@ import { UpdateEventDto } from './dto/update-event.dto';
 
 @Injectable()
 export class EventsService {
-  constructor(@InjectModel(Event.name) private eventModel: Model<EventDocument>) {}
+  constructor(
+    @InjectModel(Event.name) private eventModel: Model<EventDocument>,
+  ) {}
 
   async create(createEventDto: CreateEventDto): Promise<Event> {
     const createdEvent = new this.eventModel(createEventDto);
@@ -23,14 +25,16 @@ export class EventsService {
   }
 
   async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
-    return this.eventModel.findByIdAndUpdate(id, updateEventDto, { new: true }).exec();
+    return this.eventModel
+      .findByIdAndUpdate(id, updateEventDto, { new: true })
+      .exec();
   }
 
   async remove(id: string): Promise<Event> {
-   const removedEvent = await this.eventModel.findByIdAndDelete(id).exec();
-   if (!removedEvent) {
-     throw new NotFoundException(`Event with ID ${id} not found`);
-   }
-   return removedEvent;
- }
+    const removedEvent = await this.eventModel.findByIdAndDelete(id).exec();
+    if (!removedEvent) {
+      throw new NotFoundException(`Event with ID ${id} not found`);
+    }
+    return removedEvent;
+  }
 }

@@ -17,8 +17,7 @@ export class AuthService {
       return null;
     }
 
-
-    Logger.log(user.isVerified)
+    Logger.log(user.isVerified);
 
     if (!user.isVerified) {
       console.log('User email is not verified');
@@ -40,7 +39,7 @@ export class AuthService {
     const payload = { username: user.username, sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),
-      user: payload.username
+      user: payload.username,
     };
   }
 }

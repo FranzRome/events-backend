@@ -13,8 +13,11 @@ export class SessionSerializer extends PassportSerializer {
   }
 
   deserializeUser(userId: string, done: CallableFunction) {
-    this.usersService.findUser(userId).then((user) => {
-      done(null, user);
-    }).catch((error) => done(error));
+    this.usersService
+      .findUser(userId)
+      .then((user) => {
+        done(null, user);
+      })
+      .catch((error) => done(error));
   }
 }

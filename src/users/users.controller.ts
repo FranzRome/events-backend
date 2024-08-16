@@ -4,14 +4,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
-   constructor(private readonly usersService: UsersService) {}
- 
-   @Post('register')
-   async register(@Body() createUserDto: CreateUserDto) {
-     return this.usersService.create(createUserDto);
-   }
+  constructor(private readonly usersService: UsersService) {}
 
-   @Get('verify')
+  @Post('register')
+  async register(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
+
+  @Get('verify')
   async verify(@Query('token') token: string) {
     const user = await this.usersService.verifyUser(token);
     if (user) {
@@ -20,4 +20,4 @@ export class UsersController {
       return { message: 'Verification failed' };
     }
   }
- }
+}
