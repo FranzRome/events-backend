@@ -7,7 +7,7 @@ import * as session from 'express-session';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
-  const secret = configService.get<number>('JWT_SECRET', 4000);
+  const secret = configService.get<string>('JWT_SECRET');
   const port = configService.get<number>('PORT', 4000);
 
   app.use(session({
