@@ -44,7 +44,11 @@ export class UsersService {
    }
 
    async verifyUser(token: string): Promise<User | undefined> {
-      const user = await this.userModel.findOne({ verificationToken: token }).exec();
+      if (typeof token !== 'string') {
+        return undefined;
+      }
+
+      const user = await this.userModel.findOne({ verificationToken: { $eq: token } }).exec();
       if (user) {
         user.isVerified = true;
         user.verificationToken = undefined;
